@@ -1,0 +1,40 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Crud de Estabelecimentos",
+    "description": "API",
+    "version": "1.0.0"
+  },
+  "host": "localhost:7777/api/v1",
+  "basePath": "/",
+  "tags": [],
+  "schemes": [
+    "http"
+  ],
+  "securityDefinitions": {
+    "bearerAuth": {
+      "type": "apiKey",
+      "scheme": "bearer",
+      "bearerFormat": "JWT",
+      "name": "authorization"
+    }
+  },
+  "consumes": [],
+  "produces": [],
+  "paths": {
+    "/auth": {
+      "post": {
+        "tags": [],
+        "description": "",
+        "parameters": [],
+        "responses": {}
+      }
+    }
+  },
+  "definitions": {},
+  "security": [
+    {
+      "bearerAuth": []
+    }
+  ]
+}

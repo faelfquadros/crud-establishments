@@ -1,0 +1,37 @@
+{
+  "name": "crud-establecimentos",
+  "version": "1.0.0",
+  "description": "Crud para criação de usuários e criação de estabelecimentos",
+  "main": "app.js",
+  "scripts": {
+    "dev": "env-cmd --rc-file .env -e development node --experimental-json-modules app.js",
+    "lint-fix": "eslint --fix {src,configs,utils}/**/*.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rafaelfquadros/crud-establecimentos.git"
+  },
+  "author": "Rafael Fernandes Ferreira Quadros",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rafaelfquadros/crud-establecimentos/issues"
+  },
+  "homepage": "https://github.com/rafaelfquadros/crud-establecimentos#readme",
+  "dependencies": {
+    "consign": "^0.1.6",
+    "cors": "^2.8.5",
+    "crypto": "^1.0.1",
+    "env-cmd": "^10.1.0",
+    "express": "^4.17.1",
+    "joi": "^17.4.2",
+    "jsonwebtoken": "^8.5.1",
+    "method-override": "^3.0.0",
+    "mongoose": "^6.0.9",
+    "swagger-autogen": "^2.11.2",
+    "swagger-ui-express": "^4.1.6",
+    "winston": "^3.3.3"
+  },
+  "devDependencies": {
+    "eslint": "^7.32.0"
+  }
+}

@@ -1,0 +1,12 @@
+apps:
+  - name     : 'crud-establishments'
+    script   : ./app.js
+    log_date_format : 'YYYY-MM-DD HH:mm:ss'
+    env    :
+      NODE_ENV: development
+      APPLICATION_PORT: 7777
+      DATABASE_NAME: crud-establishments
+      DATABASE_URL: localhost:27017
+      DATABASE_USER: root
+      DATABASE_PASSWORD: root
+      JWT_SECRET: d41d8cd98f00b204e9800998ecf8427e
