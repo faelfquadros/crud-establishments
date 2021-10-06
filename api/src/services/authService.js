@@ -4,18 +4,20 @@ const jwt = require('jsonwebtoken');
 
 module.exports = ({ repositories: { usersRepository } }) => {
 
-    return {
-        authentication: async ({ user, password }) => {
-            const passwordHash = await crypto.createHash(password);
-            const userExist = await usersRepository.find({ query: { user, password: passwordHash } });
+	return {
+		authentication: async ({ user, password }) => {
+			const passwordHash = await crypto.createHash(password);
+			const userExist = await usersRepository.find({ query: { user, password: passwordHash } });
 
-            if (!userExist || !userExist.active) exception.unauthorized('Invalid user', 'authService', 'authentication');
+			if (!userExist || !userExist.active) {
+				exception.unauthorized('Invalid user', 'authService', 'authentication');
+			}
 
-            const { name, active } = await userExist;
+			const { name, active } = await userExist;
 
-            const token = jwt.sign({ name, user, active }, process.env.JWT_SECRET, { algorithm: 'HS256', expiresIn: '1h' });
+			const token = jwt.sign({ name, user, active }, process.env.JWT_SECRET, { algorithm: 'HS256', expiresIn: '1h' });
 
-            return { token };
-        },
-    };
+			return { token };
+		},
+	};
 };

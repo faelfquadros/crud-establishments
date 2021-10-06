@@ -9,27 +9,27 @@ const methodOverride = require ('method-override');
 const swagger = require ('./swagger.js');
 
 module.exports = () => {
-    const app = express();
-    app.logger = logger;
-    mongoose();
-    swagger();
-    app.use(express.json());
-    app.use(express.urlencoded( {extended: false} ));
-    app.use(methodOverride());
-    app.use(cors());
-    app.options('*', cors());
-    app.use('/api/v1', app._router);
-    app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerFile));
+	const app = express();
+	app.logger = logger;
+	mongoose();
+	swagger();
+	app.use(express.json());
+	app.use(express.urlencoded({ extended: false }));
+	app.use(methodOverride());
+	app.use(cors());
+	app.options('*', cors());
+	app.use('/api/v1', app._router);
+	app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerFile));
 
-    consign({ cwd: 'src', verbose: true })
-        .include('models')
-        .then('repositories')
-        .then('mappers')
-        .then('services')
-        .then('controllers')
-        .then('middlewares')
-        .then('routes')
-        .into(app);
+	consign({ cwd: 'src', verbose: true })
+		.include('models')
+		.then('repositories')
+		.then('mappers')
+		.then('services')
+		.then('controllers')
+		.then('middlewares')
+		.then('routes')
+		.into(app);
 
-    return app;
+	return app;
 };
