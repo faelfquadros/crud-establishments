@@ -12,17 +12,21 @@ module.exports = (app) => {
 			}
 
 			jwt.verify(headers.authorization, process.env.JWT_SECRET, { algorithm: 'HS256' }, async (err, decoded) => {
-				if (err || !decoded.user) {
-					exception.unauthorized('Invalid token', 'validation');
+				try {
+					if (err || !decoded.user) {
+						exception.unauthorized('Invalid token', 'validation', 'jwt.verify');
+					}
+					headers.subject = decoded.user;
+
+					const userEstabilishments = await establishmentsRepository.find({ query: { created_by: decoded.user } });
+
+					headers.subjectEstablishments = [];
+					userEstabilishments.map(ue => headers.subjectEstablishments.push(ue._id.toString()));
+
+					next();
+				} catch (err) {
+					next(err);
 				}
-				headers.subject = decoded.user;
-
-				const userEstabilishments = await establishmentsRepository.find({ query: { created_by: decoded.user } });
-
-				headers.subjectEstablishments = [];
-				userEstabilishments.map(ue => headers.subjectEstablishments.push(ue._id.toString()));
-
-				next();
 			});
 		} catch (err) {
 			next(err);

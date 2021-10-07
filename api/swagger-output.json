@@ -57,7 +57,35 @@
       "post": {
         "tags": [],
         "description": "",
-        "parameters": [],
+        "parameters": [
+          {
+            "name": "obj",
+            "in": "body",
+            "description": "Create user",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "example": "Rafael Fernandes"
+                },
+                "user": {
+                  "type": "string",
+                  "example": "rafaelfquadros"
+                },
+                "password": {
+                  "type": "string",
+                  "example": "testedesenha"
+                }
+              },
+              "required": [
+                "name",
+                "user",
+                "password"
+              ]
+            }
+          }
+        ],
         "responses": {}
       },
       "get": {
@@ -90,6 +118,33 @@
             "in": "path",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "obj",
+            "in": "body",
+            "description": "Update user",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "example": "Rafael Fernandes"
+                },
+                "user": {
+                  "type": "string",
+                  "example": "rafaelfquadros"
+                },
+                "password": {
+                  "type": "string",
+                  "example": "testedesenha"
+                }
+              },
+              "required": [
+                "name",
+                "user",
+                "password"
+              ]
+            }
           }
         ],
         "responses": {}
@@ -112,7 +167,54 @@
       "post": {
         "tags": [],
         "description": "",
-        "parameters": [],
+        "parameters": [
+          {
+            "name": "obj",
+            "in": "body",
+            "description": "Create establishment",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "example": "Empresa teste 3"
+                },
+                "email": {
+                  "type": "string",
+                  "example": "teste@gmail.com"
+                },
+                "phone": {
+                  "type": "string",
+                  "example": "1234567894"
+                },
+                "street": {
+                  "type": "string",
+                  "example": "Rua Amazonas"
+                },
+                "number": {
+                  "type": "number",
+                  "example": 123
+                },
+                "city": {
+                  "type": "string",
+                  "example": "Divinópolis"
+                },
+                "state": {
+                  "type": "string",
+                  "example": "Minas Gerais"
+                },
+                "country": {
+                  "type": "string",
+                  "example": "Brasil"
+                },
+                "cnpj": {
+                  "type": "string",
+                  "example": "12345678978945"
+                }
+              }
+            }
+          }
+        ],
         "responses": {}
       },
       "get": {
@@ -145,6 +247,52 @@
             "in": "path",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "obj",
+            "in": "body",
+            "description": "Update user",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "example": "Empresa teste 3"
+                },
+                "email": {
+                  "type": "string",
+                  "example": "teste@gmail.com"
+                },
+                "phone": {
+                  "type": "string",
+                  "example": "1234567894"
+                },
+                "street": {
+                  "type": "string",
+                  "example": "Rua Amazonas"
+                },
+                "number": {
+                  "type": "number",
+                  "example": 123
+                },
+                "city": {
+                  "type": "string",
+                  "example": "Divinópolis"
+                },
+                "state": {
+                  "type": "string",
+                  "example": "Minas Gerais"
+                },
+                "country": {
+                  "type": "string",
+                  "example": "Brasil"
+                },
+                "cnpj": {
+                  "type": "string",
+                  "example": "12345678978945"
+                }
+              }
+            }
           }
         ],
         "responses": {}

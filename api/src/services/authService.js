@@ -1,5 +1,5 @@
-const crypto = require('../../utils/crypto.js');
-const exception = require('../../utils/errorsHandling.js');
+const crypto = require('../../utils/crypto');
+const exception = require('../../utils/errorsHandling');
 const jwt = require('jsonwebtoken');
 
 module.exports = ({ repositories: { usersRepository } }) => {
