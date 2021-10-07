@@ -16,8 +16,8 @@ module.exports = ({ services: { establishmentsService } }) => {
 
 		getEstablishmentsById: async (req, res, next) => {
 			try {
-				const { params: { establishment_id }, headers: { subject } } = req;
-				const response = await establishmentsService.getById(establishment_id, subject);
+				const { params: { establishment_id }, headers: { subjectEstablishments } } = req;
+				const response = await establishmentsService.getById(establishment_id, subjectEstablishments);
 				res.status(OK)
 					.json({ data: response });
 			} catch (error) {
@@ -38,8 +38,8 @@ module.exports = ({ services: { establishmentsService } }) => {
 
 		updateEstablishments: async (req, res, next) => {
 			try {
-				const { body, params: { establishment_id }, headers: { subject } } = req;
-				const response = await establishmentsService.update(body, { _id: establishment_id }, subject);
+				const { body, params: { establishment_id }, headers: { subjectEstablishments } } = req;
+				const response = await establishmentsService.update(body, establishment_id, subjectEstablishments);
 				res.status(OK)
 					.json({ data: response });
 			} catch (error) {
@@ -49,8 +49,8 @@ module.exports = ({ services: { establishmentsService } }) => {
 
 		deleteEstablishments: async (req, res, next) => {
 			try {
-				const { params: { establishment_id }, headers: { subject } } = req;
-				const response = await establishmentsService.delete({ _id: establishment_id }, subject);
+				const { params: { establishment_id }, headers: { subjectEstablishments } } = req;
+				const response = await establishmentsService.delete(establishment_id, subjectEstablishments);
 				res.status(OK)
 					.json({ data: response });
 			} catch (error) {

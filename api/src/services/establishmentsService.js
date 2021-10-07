@@ -30,11 +30,11 @@ module.exports = ({ repositories: { establishmentsRepository }, mappers: { estab
 
 			return establishments;
 		},
-		getById: async (establishment_id, subject) => {
+		getById: async (establishment_id, subjectEstablishments) => {
 
-			const establishmentsExist = await establishmentsRepository.find({ query: { _id: establishment_id, created_by: subject } });
+			const establishmentsExist = subjectEstablishments.find(se => se === establishment_id);
 
-			if (!establishmentsExist.length) {
+			if (!establishmentsExist) {
 				return exception.unauthorized('Establishment belongs to another user', 'establishmentsService', 'getById');
 			}
 
@@ -46,15 +46,15 @@ module.exports = ({ repositories: { establishmentsRepository }, mappers: { estab
 
 			return establishmentsMapper.filterOne(esblishment);
 		},
-		update: async (query, options, subject) => {
+		update: async (query, establishment_id, subjectEstablishments) => {
 
-			const establishmentsExist = await establishmentsRepository.find({ query: { ...options, created_by: subject } });
+			const establishmentsExist = subjectEstablishments.find(se => se === establishment_id);
 
-			if (!establishmentsExist.length) {
+			if (!establishmentsExist) {
 				return exception.unauthorized('Establishment belongs to another user', 'establishmentsService', 'update');
 			}
 
-			const establishment = await establishmentsRepository.update(options, query);
+			const establishment = await establishmentsRepository.update({ _id: establishment_id }, query);
 
 			if (!establishment) {
 				return exception.notFound('Estabilishment id not found', 'establishmentsService', 'update');
@@ -62,15 +62,15 @@ module.exports = ({ repositories: { establishmentsRepository }, mappers: { estab
 
 			return establishment;
 		},
-		delete: async (query, subject) => {
+		delete: async (establishment_id, subjectEstablishments) => {
 
-			const establishmentsExist = await establishmentsRepository.find({ query: { ...query, created_by: subject } });
+			const establishmentsExist = subjectEstablishments.find(se => se === establishment_id);
 
-			if (!establishmentsExist.length) {
+			if (!establishmentsExist) {
 				return exception.unauthorized('Establishment belongs to another user', 'establishmentsService', 'delete');
 			}
 
-			const establishment = await establishmentsRepository.delete(query);
+			const establishment = await establishmentsRepository.delete({ _id: establishment_id });
 
 			if (!establishment) {
 				return exception.notFound('Establishment id not found', 'establishmentsService', 'delete');

@@ -13,5 +13,5 @@ module.exports = (app) => {
 			}
 		} */
 		next();
-	}, validation(authSchemas.authentication), authController.authUser); // Ok
+	}, validation(authSchemas.authentication), authController.authUser);
 };

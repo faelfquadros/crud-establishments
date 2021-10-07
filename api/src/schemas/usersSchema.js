@@ -11,7 +11,6 @@ const headers = {
 const schemas = {
 	createUsers: Joi.object()
 		.keys({
-			headers,
 			body: Joi.object()
 				.keys({
 					name: Joi.string()
