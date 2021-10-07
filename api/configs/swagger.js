@@ -1,5 +1,4 @@
-const swaggerAutogen = require('swagger-autogen');
-const generateDoc = swaggerAutogen();
+const swaggerAutogen = require('swagger-autogen')();
 
 module.exports = () => {
 	const doc = {
@@ -28,5 +27,5 @@ module.exports = () => {
 	const outputFile = './swagger-output.json';
 	const endpointsFiles = ['./src/routes/authRoute.js']; // A adicionar ainda
 
-	generateDoc(outputFile, endpointsFiles, doc);
+	swaggerAutogen(outputFile, endpointsFiles, doc);
 };

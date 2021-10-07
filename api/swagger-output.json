@@ -26,7 +26,30 @@
       "post": {
         "tags": [],
         "description": "",
-        "parameters": [],
+        "parameters": [
+          {
+            "name": "obj",
+            "in": "body",
+            "description": "Authentication",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "user": {
+                  "type": "string",
+                  "example": "rafaelfquadros"
+                },
+                "password": {
+                  "type": "string",
+                  "example": "testedesenha"
+                }
+              },
+              "required": [
+                "user",
+                "password"
+              ]
+            }
+          }
+        ],
         "responses": {}
       }
     }
