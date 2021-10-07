@@ -44,19 +44,19 @@ module.exports = ({ repositories: { usersRepository }, mappers: { usersMapper } 
 			return usersMapper.filterOne(user);
 		},
 
-		update: async (query, user_id) => {
+		update: async (query, options) => {
 
 			if (query.password) {
 				query.password = await crypto.createHash(query.password);
 			}
 
-			const user = await usersRepository.update(query, user_id);
+			const user = await usersRepository.update(options, query);
 
 			if (!user) {
 				return exception.notFound('User id not found', 'usersService', 'update');
 			}
 
-			return usersMapper.filterOne(user);
+			return user;
 		},
 
 		delete: async (query) => {

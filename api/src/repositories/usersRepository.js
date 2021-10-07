@@ -12,6 +12,10 @@ module.exports = ({ models: { usersModel } }) => {
 			return usersModel.create(data);
 		},
 
+		update: async (options = {}, query = {}) => {
+			return usersModel.updateOne(options, query);
+		},
+
 		delete: async (query) => {
 			return usersModel.deleteOne(query);
 		},
