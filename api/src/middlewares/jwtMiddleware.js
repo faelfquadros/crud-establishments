@@ -7,7 +7,9 @@ module.exports = (app) => {
 		try {
 			const { headers } = req;
 
-			if (req.originalUrl === '/api/v1/auth' || req.originalUrl === '/api/v1/docs/') {
+			if (req.originalUrl === '/api/v1/auth' ||
+				req.originalUrl === '/api/v1/docs/' ||
+				(req.originalUrl === '/api/v1/users' && req.method === 'POST')) {
 				return next();
 			}
 
