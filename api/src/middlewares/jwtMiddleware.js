@@ -17,6 +17,7 @@ module.exports = (app) => {
 						exception.unauthorized('Invalid token', 'validation', 'jwt.verify');
 					}
 					headers.subject = decoded.user;
+					headers.id = decoded._id;
 
 					const userEstabilishments = await establishmentsRepository.find({ query: { created_by: decoded.user } });
 

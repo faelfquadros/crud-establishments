@@ -14,9 +14,9 @@ module.exports = ({ repositories: { usersRepository } }) => {
 				exception.unauthorized('Invalid user', 'authService', 'authentication');
 			}
 
-			const { name, active } = userExist.shift();
+			const { _id, name, active } = userExist.shift();
 
-			const token = jwt.sign({ name, user, active }, process.env.JWT_SECRET, { algorithm: 'HS256', expiresIn: '1h' });
+			const token = jwt.sign({ _id, name, user, active }, process.env.JWT_SECRET, { algorithm: 'HS256', expiresIn: '1h' });
 
 			return { token };
 		},
