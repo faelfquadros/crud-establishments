@@ -20,6 +20,7 @@ module.exports = () => {
 	app.options('*', cors());
 	app.use('/api/v1', app._router);
 	app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerFile));
+	app.get('/', (req, res) => res.send('It works!'));
 
 	consign({ cwd: 'src', verbose: true })
 		.include('models')

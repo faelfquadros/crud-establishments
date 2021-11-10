@@ -66,8 +66,8 @@ class LoginPage extends React.Component {
                                     id="password" 
                                     placeholder="Senha"/>
                             </div>
-                            <button type="submit" className="btn btn-primary">Entrar</button>
-                            <button className="btn btn-success" onClick={this.sendCreateNewUser}>Criar Nova</button>
+                            <button type="submit" className="btn btn-primary">Login</button>
+                            <button className="btn btn-success" onClick={this.sendCreateNewUser}>New User</button>
                             
                         </form>
                     </div>

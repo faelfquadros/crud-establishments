@@ -2,11 +2,11 @@ import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import './App.css';
 
-import Header from './components/header/header.component'
 import EstablishmentsPage from './pages/establishments-page/establishments-page';
 import LoginPage from './pages/login-page/login-page';
 import NewUserPage from './pages/new-user/new-user';
 import authService from './services/auth.service';
+import NavigationBar from './NavigationBar';
 
 // Criando c component 
 class App extends React.Component {
@@ -20,27 +20,39 @@ class App extends React.Component {
         // Definindo o estado inicial
         this.state = {
             userData: null,
+            isAuthenticated: false,
         }
 
-    }
-
-    async loadUser() {
-        let userData = authService.getLoggedUser()
-        console.log(userData)
-        this.setState({userData: userData})
     }
 
     componentDidMount() {
         this.loadUser();
     }
 
-    logout() {
+    loadUser(){
+        let userData = authService.getLoggedUser();
+        if (userData) {
+            this.setState({
+                userData,
+            })
+        }
+    }
+
+    login = () => {
+        this.loadUser();
+        this.setState({ isAuthenticated: true });
+    }
+    
+    logout = () => {
         authService.clearLoggerUser()
         window.location.reload()
+        this.setState({ isAuthenticated: false });
     }
 
     // Função que renderiza o componente
     render() {
+
+        const { isAuthenticated } = this.state;
 
         /* const routes = [
             { route : "/establishments", view : EstablishmentsPage, exact : false},
@@ -49,18 +61,11 @@ class App extends React.Component {
 
         return (
            <BrowserRouter>
-                <Header title="Crud de Estabelecimentos" ref={this.myHeader}>
-                    <span>
-                        {this.state.userData?.user}
-                    </span>
-                    <button className="btn btn-primary" onClick={e => this.logout()}>
-                        Sair
-                    </button>
-                </Header>
+                {isAuthenticated && <NavigationBar isLoggedIn={isAuthenticated} logout={this.logout} userData={this.userData}/>}
                 <Switch>
                     <Route path="/establishments" component={EstablishmentsPage} />
-                    <Route path="/newUser" component={props => <NewUserPage {...props} onLogin={() => this.loadUser()}/>} />
-                    <Route path="/login" component={props => <LoginPage {...props} onLogin={() => this.loadUser()}/>} />
+                    <Route path="/newUser" component={props => <NewUserPage {...props} onLogin={() => this.login()}/>} />
+                    <Route path="/login" component={props => <LoginPage {...props} onLogin={() => this.login()}/>} />
                     {/* routes.map((item, index) => (
                         <Route key={index} path={item.route} component={item.view} exact={item.exact}/>
                     )) */}
