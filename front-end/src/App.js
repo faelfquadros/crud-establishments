@@ -34,6 +34,7 @@ class App extends React.Component {
         if (userData) {
             this.setState({
                 userData,
+                isAuthenticated: true
             })
         }
     }
@@ -59,9 +60,10 @@ class App extends React.Component {
             { route : "/login", view : LoginPage, exact : false},
         ] */
 
+        console.log('AQUIIII', isAuthenticated);
         return (
            <BrowserRouter>
-                {isAuthenticated && <NavigationBar isLoggedIn={isAuthenticated} logout={this.logout} userData={this.userData}/>}
+                {isAuthenticated && <NavigationBar isLoggedIn={isAuthenticated} logout={this.logout} userData={this.state.userData}/>}
                 <Switch>
                     <Route path="/establishments" component={EstablishmentsPage} />
                     <Route path="/newUser" component={props => <NewUserPage {...props} onLogin={() => this.login()}/>} />

@@ -35,6 +35,10 @@ class NewUserPage extends React.Component {
         }
     }
 
+    goBack = () => {
+        this.props.history.push('/login');
+    }
+
     render() {
         if(this.state.redirectsTo) {
             return(
@@ -79,7 +83,8 @@ class NewUserPage extends React.Component {
                                     placeholder="Senha"
                                     required />
                             </div>
-                            <button type="submit" className="btn btn-primary">Criar</button>
+                            <button type="submit" className="btn btn-primary">Create</button>
+                            <button type="submit" className="btn btn-success" onClick={this.goBack}>Go Back</button>
                         </form>
                     </div>
                 </div>

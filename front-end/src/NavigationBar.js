@@ -4,6 +4,7 @@ import Header from './components/header/header.component'
 class NavigationBar extends React.Component {
 
   render() {
+    console.log(this.props)
     return (
         <Header title="Stablishments Crud" ref={this.myHeader}>
             <span>
