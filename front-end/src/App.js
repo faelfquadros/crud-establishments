@@ -60,7 +60,6 @@ class App extends React.Component {
             { route : "/login", view : LoginPage, exact : false},
         ] */
 
-        console.log('AQUIIII', isAuthenticated);
         return (
            <BrowserRouter>
                 {isAuthenticated && <NavigationBar isLoggedIn={isAuthenticated} logout={this.logout} userData={this.state.userData}/>}
