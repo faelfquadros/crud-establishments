@@ -31,7 +31,7 @@ class NewUserPage extends React.Component {
             this.setState({redirectsTo : "/establishments"}, () => this.props.onLogin());
         } catch (error) {
             console.log(error)
-            alert('Usuário ou senha Inválido!')
+            alert('Invalid User ot Password!')
         }
     }
 
@@ -51,36 +51,36 @@ class NewUserPage extends React.Component {
                     <div className="card-body">
                         <form onSubmit={this.createNewUser}>
                             <div className="form-group">
-                                <label htmlFor="name">Nome</label>
+                                <label htmlFor="name">Name</label>
                                 <input 
                                     type="text" 
                                     className="form-control"
                                     onChange={e => this.setState({name: e.target.value})}
                                     value={this.state.name}
                                     id="name" 
-                                    placeholder="Usuário"
+                                    placeholder="Name"
                                     required />
                             </div>
                             <div className="form-group">
-                                <label htmlFor="user">Usuário</label>
+                                <label htmlFor="user">User</label>
                                 <input 
                                     type="text" 
                                     className="form-control"
                                     onChange={e => this.setState({user: e.target.value})}
                                     value={this.state.user}
                                     id="user" 
-                                    placeholder="Usuário" 
+                                    placeholder="User" 
                                     required />
                             </div>
                             <div className="form-group">
-                                <label htmlFor="password">Senha</label>
+                                <label htmlFor="password">Password</label>
                                 <input 
                                     type="password" 
                                     onChange={e => this.setState({password: e.target.value})}
                                     value={this.state.password}
                                     className="form-control" 
                                     id="password" 
-                                    placeholder="Senha"
+                                    placeholder="Password"
                                     required />
                             </div>
                             <button type="submit" className="btn btn-primary">Create</button>

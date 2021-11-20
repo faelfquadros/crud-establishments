@@ -7,25 +7,18 @@ import LoginPage from './pages/login-page/login-page';
 import NewUserPage from './pages/new-user/new-user';
 import authService from './services/auth.service';
 import NavigationBar from './NavigationBar';
-
-// Criando c component 
+import { Redirect } from 'react-router-dom';
 class App extends React.Component {
 
-    // Criando construtor
     constructor(props) {
-
-        // Executando o construtor da Super Class
         super(props)
-
-        // Definindo o estado inicial
         this.state = {
             userData: null,
             isAuthenticated: false,
         }
-
     }
 
-    componentDidMount() {
+    componentWillMount() {
         this.loadUser();
     }
 
@@ -46,22 +39,24 @@ class App extends React.Component {
     
     logout = () => {
         authService.clearLoggerUser()
-        window.location.reload()
-        this.setState({ isAuthenticated: false });
+        this.setState({ 
+            isAuthenticated: false
+        });
     }
 
     // Função que renderiza o componente
     render() {
 
         const { isAuthenticated } = this.state;
-
+        
         /* const routes = [
             { route : "/establishments", view : EstablishmentsPage, exact : false},
             { route : "/login", view : LoginPage, exact : false},
         ] */
-
+        
         return (
-           <BrowserRouter>
+            <BrowserRouter>
+                {!isAuthenticated && <Redirect to={"/login"}/>}
                 {isAuthenticated && <NavigationBar isLoggedIn={isAuthenticated} logout={this.logout} userData={this.state.userData}/>}
                 <Switch>
                     <Route path="/establishments" component={EstablishmentsPage} />

@@ -1,7 +1,7 @@
 {
   "name": "crud-establecimentos",
   "version": "1.0.0",
-  "description": "Crud para criação de usuários e criação de estabelecimentos",
+  "description": "Crud for creating users and their stablishments",
   "main": "app.js",
   "scripts": {
     "dev": "env-cmd --rc-file .env -e development node --experimental-json-modules app.js",

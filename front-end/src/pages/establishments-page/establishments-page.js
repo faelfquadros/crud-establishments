@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, Redirect } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import authService from '../../services/auth.service';
 import establishmentsService from '../../services/establishment.service';
 import {
@@ -10,10 +10,7 @@ import {
     Table,
     Row,
     Col,
-    UncontrolledDropdown, 
-    DropdownToggle, 
-    DropdownMenu, 
-    DropdownItem
+    Button
 } from "reactstrap";
 import { 
     AiOutlineDelete, 
@@ -82,36 +79,31 @@ class EstablishmentsPage extends React.Component {
                                     <th>Cnpj</th>
                                     <th>Created By</th>
                                     <th>Created At</th>
+                                    <th>Edit</th>
+                                    <th>Delete</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                     {establishments ? establishments.map((item, index) =>
                                         <tr key={index}>
-                                        <td>{item.name}</td>
-                                        <td>{item.city}</td>
-                                        <td>{item.cnpj}</td>
-                                        <td>{item.created_by}</td>
-                                        <td>{item.created_at}</td>
-                                        <td style={{"fontSize": "20px"}}>
-                                            <UncontrolledDropdown>
-                                                <DropdownToggle>
-                                                    <i className="bi bi-three-dots-vertical"></i>
-                                                </DropdownToggle>
-                                                <DropdownMenu>
-                                                    <Link style={{ color: 'inherit', textDecoration: 'inherit'}} to={{
-                                                        pathname: "/editStablishment",
-                                                        state: {analysisHash: item.id}
-                                                    }}>
-                                                        <DropdownItem>
-                                                                <AiOutlineEdit /> Editar
-                                                        </DropdownItem>
-                                                    </Link>
-                                                    <DropdownItem onClick={async (e) => console.log('deleted')/* await this.handleDelete(e, item.hash) */}>
-                                                        <AiOutlineDelete /> Excluir
-                                                    </DropdownItem>
-                                                </DropdownMenu>
-                                            </UncontrolledDropdown>
-                                        </td>
+                                            <td>{item.name}</td>
+                                            <td>{item.city}</td>
+                                            <td>{item.cnpj}</td>
+                                            <td>{item.created_by}</td>
+                                            <td>{item.created_at}</td>
+                                            <td>
+                                                <Link style={{ color: 'inherit', textDecoration: 'inherit'}} to={{
+                                                    pathname: "/editStablishment",
+                                                    state: {analysisHash: item.id}
+                                                }}>
+                                                    <AiOutlineEdit /> Editar
+                                                </Link>
+                                            </td>
+                                            <td>
+                                                <Button onClick={async (e) => console.log('deleted')/* await this.handleDelete(e, item.hash) */}>
+                                                    <AiOutlineDelete /> Excluir
+                                                </Button>
+                                            </td>
                                         </tr>
                                     ):null}
                                 </tbody>

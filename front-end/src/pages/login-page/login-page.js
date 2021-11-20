@@ -26,7 +26,7 @@ class LoginPage extends React.Component {
             this.setState({redirectsTo : "/establishments"}, () => this.props.onLogin());
         } catch (error) {
             console.log(error)
-            alert('Usuário ou senha Inválido!')
+            alert('Invalid User or Password!')
         }
     }
 
@@ -47,14 +47,14 @@ class LoginPage extends React.Component {
                     <div className="card-body">
                         <form onSubmit={this.sendLogin}>
                             <div className="form-group">
-                                <label htmlFor="user">Usuário</label>
+                                <label htmlFor="user">User</label>
                                 <input 
                                     type="text" 
                                     className="form-control"
                                     onChange={e => this.setState({user: e.target.value})}
                                     value={this.state.user}
                                     id="user" 
-                                    placeholder="Usuário" />
+                                    placeholder="User" />
                             </div>
                             <div className="form-group">
                                 <label htmlFor="password">Senha</label>
