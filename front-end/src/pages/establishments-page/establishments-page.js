@@ -10,11 +10,10 @@ import {
     Table,
     Row,
     Col,
-    Button
 } from "reactstrap";
 import { 
     AiOutlineDelete, 
-    AiOutlineEdit } 
+    AiTwotoneEdit, } 
 from 'react-icons/ai';
 
 class EstablishmentsPage extends React.Component {
@@ -61,7 +60,10 @@ class EstablishmentsPage extends React.Component {
             )
         } */
         return (
-          <div className="container">
+            <div className="container">
+                <Link to={{ pathname: "/newStablishment" }} className="btn btn-success create-button-stablishment">
+                    New Stablishment
+                </Link>
               <>
                 <div className="content">
                     <Row>
@@ -96,13 +98,11 @@ class EstablishmentsPage extends React.Component {
                                                     pathname: "/editStablishment",
                                                     state: {analysisHash: item.id}
                                                 }}>
-                                                    <AiOutlineEdit /> Editar
+                                                    <AiTwotoneEdit />
                                                 </Link>
                                             </td>
                                             <td>
-                                                <Button onClick={async (e) => console.log('deleted')/* await this.handleDelete(e, item.hash) */}>
-                                                    <AiOutlineDelete /> Excluir
-                                                </Button>
+                                                <AiOutlineDelete className="delete-button" onClick={async (e) => console.log('deleted')/* await this.handleDelete(e, item.hash) */}/>
                                             </td>
                                         </tr>
                                     ):null}

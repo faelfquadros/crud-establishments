@@ -15,3 +15,13 @@ code {
 .btn-success {
   float: right;
 }
+
+.delete-button {
+  cursor: pointer;
+}
+
+.create-button-stablishment {
+  float: inherit;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
