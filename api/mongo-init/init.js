@@ -18,7 +18,7 @@ db.users.insert({
 	created_by: 'system',
 	updated_by: 'system',
 	name: 'Default User',
-	user: 'admin',
+	user: 'defaultUser',
 	// password = gd2D2@cjwcvneSMs2Sc_ew // Alterar para nova senha com encript novo
 	password: 'e025931cd226c575196f9a9f76de0125', // Alterar para nova senha com encript novo
 	is_deleted: false,
