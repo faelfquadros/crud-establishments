@@ -54,8 +54,8 @@ class EstablishmentsPage extends React.Component {
 
         return (
             <div className="container">
-                <Link to={{ pathname: "/newStablishment" }} className="btn btn-success create-button-stablishment">
-                    New Stablishment
+                <Link to={{ pathname: "/newEstablishment" }} className="btn btn-success create-button-establishment">
+                    New Establishment
                 </Link>
               <>
                 <div className="content">
@@ -63,7 +63,7 @@ class EstablishmentsPage extends React.Component {
                         <Col md="12">
                         <Card>
                             <CardHeader>
-                            <CardTitle tag="h4">Stablishments List</CardTitle>
+                            <CardTitle tag="h4">Establishments List</CardTitle>
                             </CardHeader>
                             <CardBody>
                             <Table responsive>
@@ -88,7 +88,7 @@ class EstablishmentsPage extends React.Component {
                                             <td>{item.created_at}</td>
                                             <td>
                                                 <Link style={{ color: 'inherit', textDecoration: 'inherit'}} to={{
-                                                    pathname: "/editStablishment",
+                                                    pathname: "/editEstablishment",
                                                     state: {analysisHash: item.id}
                                                 }}>
                                                     <AiTwotoneEdit />
