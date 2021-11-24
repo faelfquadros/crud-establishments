@@ -2,7 +2,8 @@ import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import './App.css';
 
-import EstablishmentsPage from './pages/establishments-page/establishments-page';
+import EstablishmentsPage from './pages/establishments/establishments-list';
+import EstablishmentsCreate from './pages/establishments/establishments-create';
 import LoginPage from './pages/login-page/login-page';
 import NewUserPage from './pages/new-user/new-user';
 import authService from './services/auth.service';
@@ -62,6 +63,7 @@ class App extends React.Component {
                     <Route path="/establishments" component={EstablishmentsPage} />
                     <Route path="/newUser" component={props => <NewUserPage {...props} onLogin={() => this.login()}/>} />
                     <Route path="/login" component={props => <LoginPage {...props} onLogin={() => this.login()}/>} />
+                    <Route path="/newStablishment" component={props => <EstablishmentsCreate {...props} />} />
                     {/* routes.map((item, index) => (
                         <Route key={index} path={item.route} component={item.view} exact={item.exact}/>
                     )) */}

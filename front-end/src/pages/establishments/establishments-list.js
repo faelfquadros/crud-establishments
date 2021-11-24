@@ -52,13 +52,6 @@ class EstablishmentsPage extends React.Component {
 
         const { establishments } = this.state;
 
-        console.log(establishments)
-
-        /* if(this.state.redirectsTo) {
-            return(
-                <Redirect to={this.state.redirectsTo}/>
-            )
-        } */
         return (
             <div className="container">
                 <Link to={{ pathname: "/newStablishment" }} className="btn btn-success create-button-stablishment">
