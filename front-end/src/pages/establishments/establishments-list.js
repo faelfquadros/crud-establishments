@@ -48,6 +48,19 @@ class EstablishmentsPage extends React.Component {
         }
     }
 
+    handleDelete = async (e, index, id) => {
+        try {
+            e.preventDefault();
+            await establishmentsService.deleteEstablishment(id);
+
+            let items= this.state.establishments;
+            items.splice(index,1);
+            this.setState({ establishments:items });
+        } catch (error) {
+            this.setState({redirectsTo: "/login"})
+        }
+    }
+
     render() {
 
         const { establishments } = this.state;
@@ -89,13 +102,13 @@ class EstablishmentsPage extends React.Component {
                                             <td>
                                                 <Link style={{ color: 'inherit', textDecoration: 'inherit'}} to={{
                                                     pathname: "/editEstablishment",
-                                                    state: {analysisHash: item.id}
+                                                    state: {analysisHash: item._id}
                                                 }}>
                                                     <AiTwotoneEdit />
                                                 </Link>
                                             </td>
                                             <td>
-                                                <AiOutlineDelete className="delete-button" onClick={async (e) => console.log('deleted')/* await this.handleDelete(e, item.hash) */}/>
+                                                <AiOutlineDelete className="delete-button" onClick={async (e) => await this.handleDelete(e, index, item._id)}/>
                                             </td>
                                         </tr>
                                     ):null}

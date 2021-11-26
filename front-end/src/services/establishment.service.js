@@ -44,8 +44,8 @@ const establishmentsService = {
         });
     },
 
-    async deleteEstablishments(establishments_id) {
-        const endpoint = `${apiUrl}/establishments${establishments_id}`
+    async deleteEstablishment(establishments_id) {
+        const endpoint = `${apiUrl}/establishments/${establishments_id}`
 
         const storage = await authService.getLoggedUser()
 

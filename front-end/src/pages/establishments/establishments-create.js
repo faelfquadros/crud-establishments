@@ -12,11 +12,11 @@ class NewUserPage extends React.Component {
             email: "",
             phone: "",
             street: "",
-            number: null,
+            number: "",
             city: "",
             state: "",
             country: "",
-            cnpj: null,
+            cnpj: "",
             redirectsTo: null,
         }
     }
@@ -39,14 +39,12 @@ class NewUserPage extends React.Component {
         }
 
         try {
-            console.log('----------------------------');
-            console.log(data);
-            console.log('----------------------------');
-            // await establishmentsService.createEstablishments(data);
+            let teste = await establishmentsService.createEstablishments(data);
+            console.log(teste)
             this.setState({redirectsTo : "/establishments"});
         } catch (error) {
-            console.log(error)
-            alert('Invalid User ot Password!')
+            console.log('error', error)
+            //alert('Invalid User ot Password!')
         }
     }
 
@@ -74,7 +72,7 @@ class NewUserPage extends React.Component {
                     <div className="card w-50">
                     {/* <button type="submit" className="btn btn-success" onClick={this.goBack}>Go Back</button> */}
                         <div className="card-body">
-                            <form onSubmit={this.createNewUser}>
+                            <form onSubmit={this.createNewEstablishment}>
                                 <div className="form-group">
                                     <label htmlFor="name">Name</label>
                                     <input 
