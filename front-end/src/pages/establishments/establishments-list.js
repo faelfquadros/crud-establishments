@@ -102,7 +102,7 @@ class EstablishmentsPage extends React.Component {
                                             <td>
                                                 <Link style={{ color: 'inherit', textDecoration: 'inherit'}} to={{
                                                     pathname: "/editEstablishment",
-                                                    state: {analysisHash: item._id}
+                                                    state: {establishmentId: item._id}
                                                 }}>
                                                     <AiTwotoneEdit />
                                                 </Link>

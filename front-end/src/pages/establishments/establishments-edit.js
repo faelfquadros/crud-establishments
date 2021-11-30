@@ -3,10 +3,11 @@ import { Redirect, Link } from 'react-router-dom';
 import authService from '../../services/auth.service';
 import establishmentsService from '../../services/establishment.service';
 
-class CreateEstablishmentPage extends React.Component {
+class EditEstablishmentPage extends React.Component {
 
     constructor(props) {
         super(props)
+        this.establishmentId = this.props.location.state.establishmentId;
         this.state = {
             name: "",
             email: "",
@@ -21,7 +22,31 @@ class CreateEstablishmentPage extends React.Component {
         }
     }
 
-    createNewEstablishment = async (event) => {
+    componentDidMount(){
+        this.getEstablishmentById();
+    }
+
+    getEstablishmentById = async () => {
+        try {
+            const establishment = await establishmentsService.getEstablishmentsById(this.establishmentId);
+            const { data } = establishment.data;
+            this.setState({
+                name: data.name,
+                email: data.email,
+                phone: data.phone,
+                street: data.street,
+                number: data.number,
+                city: data.city,
+                state: data.state,
+                country: data.country,
+                cnpj: data.cnpj,
+            });
+        } catch (error) {
+            console.log('error', error)
+        }
+    }
+
+    updateEstablishment = async (event) => {
         event.preventDefault();
         const userLogged = await this.getLoggedUser();
 
@@ -39,8 +64,7 @@ class CreateEstablishmentPage extends React.Component {
         }
 
         try {
-            let teste = await establishmentsService.createEstablishments(data);
-            console.log(teste)
+            await establishmentsService.updateEstablishment(this.establishmentId, data);
             this.setState({redirectsTo : "/establishments"});
         } catch (error) {
             console.log('error', error)
@@ -72,7 +96,7 @@ class CreateEstablishmentPage extends React.Component {
                     <div className="card w-50">
                     {/* <button type="submit" className="btn btn-success" onClick={this.goBack}>Go Back</button> */}
                         <div className="card-body">
-                            <form onSubmit={this.createNewEstablishment}>
+                            <form onSubmit={this.updateEstablishment}>
                                 <div className="form-group">
                                     <label htmlFor="name">Name</label>
                                     <input 
@@ -172,7 +196,7 @@ class CreateEstablishmentPage extends React.Component {
                                         placeholder="Country" 
                                         required />
                                 </div>
-                                <button type="submit" className="btn btn-primary">Create</button>
+                                <button type="submit" className="btn btn-primary">Update</button>
                             </form>
                         </div>
                     </div>
@@ -180,7 +204,6 @@ class CreateEstablishmentPage extends React.Component {
             </div>
         )
     }
-
 }
 
-export default CreateEstablishmentPage;
+export default EditEstablishmentPage;

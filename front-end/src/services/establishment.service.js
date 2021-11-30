@@ -34,7 +34,7 @@ const establishmentsService = {
         });
     },
 
-    async updateEstablishments(establishments_id, data) {
+    async updateEstablishment(establishments_id, data) {
         const endpoint = `${apiUrl}/establishments/${establishments_id}`
 
         const storage = await authService.getLoggedUser()

@@ -4,6 +4,7 @@ import './App.css';
 
 import EstablishmentsList from './pages/establishments/establishments-list';
 import EstablishmentsCreate from './pages/establishments/establishments-create';
+import EstablishmentsEdit from './pages/establishments/establishments-edit';
 import LoginPage from './pages/login-page/login-page';
 import NewUserPage from './pages/new-user/new-user';
 import authService from './services/auth.service';
@@ -64,6 +65,7 @@ class App extends React.Component {
                     <Route path="/newUser" component={props => <NewUserPage {...props} onLogin={() => this.login()}/>} />
                     <Route path="/login" component={props => <LoginPage {...props} onLogin={() => this.login()}/>} />
                     <Route path="/newEstablishment" component={props => <EstablishmentsCreate {...props} />} />
+                    <Route path="/editEstablishment" component={props => <EstablishmentsEdit {...props} />} />
                     {/* routes.map((item, index) => (
                         <Route key={index} path={item.route} component={item.view} exact={item.exact}/>
                     )) */}
