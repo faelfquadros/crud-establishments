@@ -2,6 +2,7 @@ import React from 'react'
 import { Redirect, Link } from 'react-router-dom';
 import authService from '../../services/auth.service';
 import establishmentsService from '../../services/establishment.service';
+import { cnpjMask } from '../../helpers/utils';
 
 class CreateEstablishmentPage extends React.Component {
 
@@ -58,6 +59,7 @@ class CreateEstablishmentPage extends React.Component {
     }
 
     render() {
+
         if(this.state.redirectsTo) {
             return(
                 <Redirect to={this.state.redirectsTo}/>
@@ -87,9 +89,9 @@ class CreateEstablishmentPage extends React.Component {
                                 <div className="form-group">
                                     <label htmlFor="cnpj">Cnpj</label>
                                     <input 
-                                        type="number" 
+                                        type="text" 
                                         className="form-control"
-                                        onChange={e => this.setState({cnpj: e.target.value})}
+                                        onChange={e => this.setState({cnpj: cnpjMask(e.target.value)})}
                                         value={this.state.cnpj}
                                         id="cnpj" 
                                         placeholder="Cnpj" 
