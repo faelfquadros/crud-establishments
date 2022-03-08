@@ -25,3 +25,13 @@ code {
   margin-top: 20px;
   margin-bottom: 20px;
 }
+
+.user-name {
+  padding-right: 15px;
+}
+
+.establishments-list-actions {
+  display: flex;
+  justify-content: space-evenly;
+  border: 0 !important;
+}

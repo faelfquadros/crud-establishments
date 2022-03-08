@@ -2,7 +2,9 @@ import React from 'react'
 import { Redirect, Link } from 'react-router-dom';
 import authService from '../../services/auth.service';
 import establishmentsService from '../../services/establishment.service';
-import { cnpjMask } from '../../helpers/utils';
+import { cnpjMask, getNumbers, phoneMask } from '../../helpers/utils';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 class CreateEstablishmentPage extends React.Component {
 
@@ -28,9 +30,9 @@ class CreateEstablishmentPage extends React.Component {
 
         const data = {
             name: this.state.name,
-            cnpj: this.state.cnpj,
+            cnpj: getNumbers(this.state.cnpj),
             email: this.state.email,
-            phone: this.state.phone,
+            phone: getNumbers(this.state.phone),
             street: this.state.street,
             number: this.state.number,
             city: this.state.city,
@@ -40,11 +42,15 @@ class CreateEstablishmentPage extends React.Component {
         }
 
         try {
-            let teste = await establishmentsService.createEstablishments(data);
-            console.log(teste)
+            await establishmentsService.createEstablishments(data);
             this.setState({redirectsTo : "/establishments"});
         } catch (error) {
-            console.log('error', error)
+            console.log(error.response.data.error)
+            if (401 === error.response.status) {
+                this.setState({redirectsTo: "/login"})
+            } else {
+                // TODO Chamar toast
+            }
             //alert('Invalid User ot Password!')
         }
     }
@@ -62,11 +68,22 @@ class CreateEstablishmentPage extends React.Component {
 
         if(this.state.redirectsTo) {
             return(
-                <Redirect to={this.state.redirectsTo}/>
+                <Redirect to={{pathname: this.state.redirectsTo, state: { toast: 'establishment-creation', message: 'Establishment Created !' }}}/>
             )
         }
         return (
             <div className="container">
+            <ToastContainer
+                position="top-right"
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+            />
                 <Link to={{ pathname: "/establishments" }} className="btn btn-success create-button-establishment">
                     Go Back
                 </Link>
@@ -113,10 +130,11 @@ class CreateEstablishmentPage extends React.Component {
                                     <input 
                                         type="text" 
                                         className="form-control"
-                                        onChange={e => this.setState({phone: e.target.value})}
+                                        onChange={e => this.setState({phone: phoneMask(e.target.value)})}
                                         value={this.state.phone}
                                         id="phone" 
                                         placeholder="Phone" 
+                                        maxLength={15}
                                         required />
                                 </div>
                                 <div className="form-group">

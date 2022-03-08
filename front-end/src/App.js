@@ -46,15 +46,9 @@ class App extends React.Component {
         });
     }
 
-    // Função que renderiza o componente
     render() {
 
         const { isAuthenticated } = this.state;
-        
-        /* const routes = [
-            { route : "/establishments", view : EstablishmentsPage, exact : false},
-            { route : "/login", view : LoginPage, exact : false},
-        ] */
         
         return (
             <BrowserRouter>
@@ -66,9 +60,6 @@ class App extends React.Component {
                     <Route path="/login" component={props => <LoginPage {...props} onLogin={() => this.login()}/>} />
                     <Route path="/newEstablishment" component={props => <EstablishmentsCreate {...props} />} />
                     <Route path="/editEstablishment" component={props => <EstablishmentsEdit {...props} />} />
-                    {/* routes.map((item, index) => (
-                        <Route key={index} path={item.route} component={item.view} exact={item.exact}/>
-                    )) */}
                 </Switch>
            </BrowserRouter>
         )
