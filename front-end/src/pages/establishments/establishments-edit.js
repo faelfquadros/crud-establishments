@@ -2,6 +2,8 @@ import React from 'react'
 import { Redirect, Link } from 'react-router-dom';
 import authService from '../../services/auth.service';
 import establishmentsService from '../../services/establishment.service';
+import { cnpjMask, getNumbers, phoneMask, formatField} from '../../helpers/utils';
+import { ToastContainer, toast, Flip } from 'react-toastify';
 
 class EditEstablishmentPage extends React.Component {
 
@@ -33,13 +35,13 @@ class EditEstablishmentPage extends React.Component {
             this.setState({
                 name: data.name,
                 email: data.email,
-                phone: data.phone,
+                phone: phoneMask(data.phone),
                 street: data.street,
                 number: data.number,
                 city: data.city,
                 state: data.state,
                 country: data.country,
-                cnpj: data.cnpj,
+                cnpj: cnpjMask(data.cnpj),
             });
         } catch (error) {
             console.log('error', error)
@@ -52,9 +54,9 @@ class EditEstablishmentPage extends React.Component {
 
         const data = {
             name: this.state.name,
-            cnpj: this.state.cnpj,
+            cnpj: getNumbers(this.state.cnpj),
             email: this.state.email,
-            phone: this.state.phone,
+            phone: getNumbers(this.state.phone),
             street: this.state.street,
             number: this.state.number,
             city: this.state.city,
@@ -67,9 +69,27 @@ class EditEstablishmentPage extends React.Component {
             await establishmentsService.updateEstablishment(this.establishmentId, data);
             this.setState({redirectsTo : "/establishments"});
         } catch (error) {
-            console.log('error', error)
-            //alert('Invalid User ot Password!')
+            if (401 === error.response.status) {
+                this.setState({redirectsTo: "/login"})
+            } else if (400 === error.response.status) {
+                this.callToast(error.response.data.error);
+            } else {
+                this.callToast(error.response.data.error);
+            }
         }
+    }
+
+    callToast = (message) => {
+        toast.error(`${formatField(message)} 🚫`, {
+            position: "top-right",
+            autoClose: 2000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "colored"
+        });
     }
 
     getLoggedUser = async () => {
@@ -84,11 +104,23 @@ class EditEstablishmentPage extends React.Component {
     render() {
         if(this.state.redirectsTo) {
             return(
-                <Redirect to={this.state.redirectsTo}/>
+                <Redirect to={{pathname: this.state.redirectsTo, state: { toastMessage: 'Establishment updated !' }}}/>
             )
         }
         return (
             <div className="container">
+                <ToastContainer
+                    position="top-right"
+                    autoClose={2000}
+                    hideProgressBar={false}
+                    newestOnTop={false}
+                    closeOnClick
+                    rtl={false}
+                    transition={Flip}
+                    pauseOnFocusLoss
+                    draggable
+                    pauseOnHover
+                />
                 <Link to={{ pathname: "/establishments" }} className="btn btn-success create-button-establishment">
                     Go Back
                 </Link>
@@ -111,9 +143,9 @@ class EditEstablishmentPage extends React.Component {
                                 <div className="form-group">
                                     <label htmlFor="cnpj">Cnpj</label>
                                     <input 
-                                        type="number" 
+                                        type="text" 
                                         className="form-control"
-                                        onChange={e => this.setState({cnpj: e.target.value})}
+                                        onChange={e => this.setState({cnpj: cnpjMask(e.target.value)})}
                                         value={this.state.cnpj}
                                         id="cnpj" 
                                         placeholder="Cnpj" 
@@ -135,10 +167,11 @@ class EditEstablishmentPage extends React.Component {
                                     <input 
                                         type="text" 
                                         className="form-control"
-                                        onChange={e => this.setState({phone: e.target.value})}
+                                        onChange={e => this.setState({phone: phoneMask(e.target.value)})}
                                         value={this.state.phone}
                                         id="phone" 
                                         placeholder="Phone" 
+                                        maxLength={15}
                                         required />
                                 </div>
                                 <div className="form-group">

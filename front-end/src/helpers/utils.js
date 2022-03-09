@@ -1,4 +1,4 @@
-export const cnpjMask = (value) => {
+export function cnpjMask(value) {
     return value
       .replace(/\D+/g, '')
       .replace(/(\d{2})(\d)/, '$1.$2')
@@ -8,14 +8,19 @@ export const cnpjMask = (value) => {
       .replace(/(-\d{2})\d+?$/, '$1')
 }
 
-export const getNumbers = (value) => {
+export function getNumbers(value) {
     return value.replace(/\D/g, '');
 }
 
-export const phoneMask = (v) => {
+export function phoneMask(value) {
 
-    v=v.replace(/\D/g,""); //Remove tudo o que não é dígito
-    v=v.replace(/^(\d{2})(\d)/g,"($1) $2"); //Coloca parênteses em volta dos dois primeiros dígitos
-    v=v.replace(/(\d)(\d{4})$/,"$1-$2"); //Coloca hífen entre o quarto e o quinto dígitos
-    return v;
-  }
+    value=value.replace(/\D/g,""); //Remove tudo o que não é dígito
+    value=value.replace(/^(\d{2})(\d)/g,"($1) $2"); //Coloca parênteses em volta dos dois primeiros dígitos
+    value=value.replace(/(\d)(\d{4})$/,"$1-$2"); //Coloca hífen entre o quarto e o quinto dígitos
+    return value;
+}
+
+export function formatField(value) {
+  const offQuotes = value.replace(/("|')/g, '');
+  return offQuotes.split('.')[1];
+}

@@ -48,22 +48,17 @@ class EstablishmentsPage extends React.Component {
     }
 
     loadToast = () => {
-        if (this.props.location.state && this.props.location.state.toast) {
-            switch (this.props.location.state.toast) {
-                case 'establishment-creation':
-                    toast.success(`${this.props.location.state.message} 🔥`, {
-                        position: "top-right",
-                        autoClose: 5000,
-                        hideProgressBar: false,
-                        closeOnClick: true,
-                        pauseOnHover: true,
-                        draggable: true,
-                        progress: undefined,
-                        theme: "colored"
-                    });
-                default:
-                    break;
-            }
+        if (this.props.location.state && this.props.location.state.toastMessage) {
+            toast.success(`${this.props.location.state.toastMessage} 🔥`, {
+                position: "top-right",
+                autoClose: 2000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "colored"
+            });
             const {history} = this.props;
             history.replace() 
         }

@@ -65,17 +65,29 @@ const schemas = {
 				}),
 			body: Joi.object()
 				.keys({
-					name: Joi.string(),
+					name: Joi.string()
+						.required(),
 					email: Joi.string()
-						.email(),
+						.email()
+						.required(),
 					phone: Joi.string()
 						.min(10)
-						.max(11),
-					street: Joi.string(),
-					number: Joi.number(),
-					city: Joi.string(),
-					state: Joi.string(),
-					country: Joi.string(),
+						.max(11)
+						.required(),
+					street: Joi.string()
+						.required(),
+					number: Joi.number()
+						.required(),
+					city: Joi.string()
+						.required(),
+					state: Joi.string()
+						.required(),
+					country: Joi.string()
+						.required(),
+					cnpj: Joi.string()
+						.min(14)
+						.max(14)
+						.required(),
 				}),
 		}),
 

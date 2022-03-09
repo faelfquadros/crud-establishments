@@ -2,8 +2,8 @@ import React from 'react'
 import { Redirect, Link } from 'react-router-dom';
 import authService from '../../services/auth.service';
 import establishmentsService from '../../services/establishment.service';
-import { cnpjMask, getNumbers, phoneMask } from '../../helpers/utils';
-import { ToastContainer, toast } from 'react-toastify';
+import { cnpjMask, getNumbers, phoneMask, formatField } from '../../helpers/utils';
+import { ToastContainer, toast, Flip } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 class CreateEstablishmentPage extends React.Component {
@@ -45,14 +45,28 @@ class CreateEstablishmentPage extends React.Component {
             await establishmentsService.createEstablishments(data);
             this.setState({redirectsTo : "/establishments"});
         } catch (error) {
-            console.log(error.response.data.error)
             if (401 === error.response.status) {
                 this.setState({redirectsTo: "/login"})
+            } else if (400 === error.response.status) {
+                console.log(error.response.data.error)
+                this.callToast(error.response.data.error);
             } else {
-                // TODO Chamar toast
+                this.callToast(error.response.data.error);
             }
-            //alert('Invalid User ot Password!')
         }
+    }
+
+    callToast = (message) => {
+        toast.error(`${formatField(message)} 🚫`, {
+            position: "top-right",
+            autoClose: 2000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "colored"
+        });
     }
 
     getLoggedUser = async () => {
@@ -68,22 +82,23 @@ class CreateEstablishmentPage extends React.Component {
 
         if(this.state.redirectsTo) {
             return(
-                <Redirect to={{pathname: this.state.redirectsTo, state: { toast: 'establishment-creation', message: 'Establishment Created !' }}}/>
+                <Redirect to={{pathname: this.state.redirectsTo, state: { toastMessage: 'Establishment Created !' }}}/>
             )
         }
         return (
             <div className="container">
-            <ToastContainer
-                position="top-right"
-                autoClose={5000}
-                hideProgressBar={false}
-                newestOnTop={false}
-                closeOnClick
-                rtl={false}
-                pauseOnFocusLoss
-                draggable
-                pauseOnHover
-            />
+                <ToastContainer
+                    position="top-right"
+                    autoClose={2000}
+                    hideProgressBar={false}
+                    newestOnTop={false}
+                    closeOnClick
+                    rtl={false}
+                    transition={Flip}
+                    pauseOnFocusLoss
+                    draggable
+                    pauseOnHover
+                />
                 <Link to={{ pathname: "/establishments" }} className="btn btn-success create-button-establishment">
                     Go Back
                 </Link>
