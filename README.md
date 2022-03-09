@@ -1,15 +1,13 @@
-# Documentação api
+# crud-establishments
 
- - Projeto atualmente em desenvolvimento
- - Atualmente totalmente desenvolvido somente back-end
- - Para rodar o projeto localmente basta acessar /api
- - Rodar comando "npm i" para instalação dos pacotes
- - rodar o comando docker-compose up -d para subir o banco de dados e criação de um usuário padrão
- - Para rodar o projeto basta rodar o comando "npm run dev"
- - O acesso da documentação das rotas pode ser encontrado em http://localhost:7777/api/v1/docs
+- To run the project locally just access /api
+- Run "npm i" command to install packages
+- Run the command docker-compose up -d to upload the database and create a default user
+- To run the project just run the command "npm run dev"
+- Access documentation for routes can be found at http://localhost:7777/api/v1/docs
 
- - Regras de negócio adotadas
- - Como ficou bem em aberto as regras de negócio, foi feito da seguinte forma, a ideia foi a criação de um sistema com login de usuários em que cada usuário pode cadastrar seus estabelecimentos e ter acesso a somente seus estabelecimentos.
- - Para isso foi criado a rota de autenticação para criação do token de acesso das demais rotas.
- - Foram criados dois CRUDS, o de usuários e o de estabelecimentos.
- - Também foi criada a regra de que os usuários só podem ter acesso aos dados de seus estabelecimentos.
+- Adopted business rules
+- It was done as follows, the idea was to create a system with user login in which each user can register their establishments and have access to only their establishments.
+- For this, the authentication route was created to create the access token of the other routes.
+- Two CRUDS were created, one for users and one for establishments.
+- The rule was also created that users can only have access to the data of their establishments.
